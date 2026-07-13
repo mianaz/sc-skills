@@ -1,10 +1,10 @@
 # sc-skills
 
-An opinionated, **Seurat-first** core pipeline of [Claude Code](https://www.claude.com/product/claude-code) *Agent Skills* for single-cell RNA-seq analysis — from raw CellRanger output through integration and marker-verified annotation to publication-grade figures, under a shared reproducibility contract.
+An opinionated, **Seurat-first** core pipeline of [Claude Code](https://www.claude.com/product/claude-code) *Agent Skills* for single-cell RNA-seq analysis — from raw CellRanger output through integration and marker-verified annotation to publication-grade figures, under a shared reproducibility contract — plus a **paper-distillation engine** that grows the suite from the literature.
 
 Skills are plain `SKILL.md` folders, so they load in Claude Code and (unmodified) in Codex and Cursor skill directories.
 
-## What's inside (7 skills)
+## What's inside (8 skills)
 
 **Orchestration**
 - **single-cell** — entry point; orients an analysis and routes to the right stage.
@@ -19,7 +19,10 @@ Skills are plain `SKILL.md` folders, so they load in Claude Code and (unmodified
 - **sc-conventions** — single-cell house rules (Seurat as source of truth, the Seurat↔AnnData bridge, palettes, cell-type ordering, figure sizing), layered on top of…
 - **scientific-reproducibility** — the universal output contract: dual-version figures, source-data export, exact p-values (not stars), publication dpi/vector, a running `methods.md` log, and parameter-encoded output filenames.
 
-This is a deliberately minimal backbone — the pipeline stages and standards that every single-cell analysis hangs off. Downstream methods (trajectory, gene regulatory networks, cell–cell communication, spatial, CRISPR screens, differential abundance, pseudobulk DE) are intentionally out of scope here.
+**Growth engine**
+- **sc-paper-distill** — turn a paper + its code into a structured, provenance-tracked digest (methods, figures, visual style, reusable snippets), ending in *Promotion Proposals* that fold vetted recipes back into `scientific-plotting`, `sc-conventions`, and the pipeline skills. This is how the suite **grows with you** instead of staying frozen — read one high-profile paper, promote its best figure/analysis pattern, and every future analysis inherits it. Ships with one worked example digest (a pan-cancer TLS spatial paper); your own corpus stays local.
+
+This is a deliberately minimal backbone — the pipeline stages and standards that every single-cell analysis hangs off, plus the distillation loop that extends it. Downstream methods (trajectory, gene regulatory networks, cell–cell communication, spatial, CRISPR screens, differential abundance, pseudobulk DE) are intentionally out of scope as bundled skills — you grow them in via paper-distill.
 
 ## Install
 
@@ -37,7 +40,7 @@ git clone https://github.com/mianaz/sc-skills.git
 cp -R sc-skills/skills/* ~/.claude/skills/
 ```
 
-Keep all seven together — they cross-reference each other, and `sc-conventions` + `scientific-reproducibility` underlie every stage.
+Keep all eight together — they cross-reference each other, and `sc-conventions` + `scientific-reproducibility` underlie every stage.
 
 ## Notes
 
@@ -45,7 +48,11 @@ Referenced software (Seurat, scanpy, scVI, scDblFinder, harmony, …) are ordina
 
 ## Extending the backbone
 
-This is a starting point, not a ceiling. To add a pipeline stage or a method skill:
+This is a starting point, not a ceiling — and `sc-paper-distill` is built to extend it. Two ways to grow:
+
+**Automated (recommended) — the distillation loop.** Hand `sc-paper-distill` a paper + its code repo. It reads the methods, figures, and code; writes a provenance-tracked digest; and proposes concrete *Promotion Proposals*. You approve the ones worth keeping, and they land as reusable recipes/requirements in `scientific-plotting`, `sc-conventions`, or a pipeline skill — each carrying a back-link to its source paper. The suite gets sharper every time you read a good paper.
+
+**Manual — add a whole new skill.** To add a pipeline stage or method skill by hand:
 
 1. Drop a `skills/<name>/SKILL.md` folder in (plus any `references/*.md`).
 2. Have it **inherit the contract** — point to `scientific-reproducibility` (dual-version figures, source data, exact p-values, a `methods.md` log) and, for single-cell work, `sc-conventions`.

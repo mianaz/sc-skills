@@ -10,7 +10,7 @@
       "name": "sc-skills",
       "version": "0.1.0",
       "source": "./",
-      "description": "7 Seurat-first Claude Code skills for single-cell RNA-seq: preprocessing, integration, marker-verified annotation, R-first publication figures, and a shared house-conventions + reproducibility contract. A deliberately minimal core-pipeline backbone.",
+      "description": "8 Seurat-first Claude Code skills for single-cell RNA-seq: preprocessing, integration, marker-verified annotation, R-first publication figures, a shared house-conventions + reproducibility contract, and a paper-distillation engine that grows the suite from the literature. A deliberately minimal core-pipeline backbone.",
       "author": {
         "name": "Miana"
       },

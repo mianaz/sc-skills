@@ -8,7 +8,7 @@ description: Use when starting or orienting a single-cell RNA-seq analysis in an
 ## Overview
 Opinionated single-cell RNA-seq workflow. **The Seurat object is the source of truth.** Python steps (CellBender, scVI/scANVI, scrublet, pretrained annotators) are run as detours and their results are always carried back into the Seurat object. Every plot is saved in two versions with its source data; every analytical choice is logged in `methods.md`.
 
-This is the **core pipeline backbone** — preprocessing → integration → annotation, plus shared conventions, the reproducibility contract, and figures. Downstream analyses (trajectory, gene regulatory networks, cell–cell communication, spatial, CRISPR screens, differential abundance, pseudobulk DE) are out of scope for this backbone.
+This is the **core pipeline backbone** — preprocessing → integration → annotation, plus shared conventions, the reproducibility contract, and figures — with **sc-paper-distill** as the growth engine that extends the suite from the literature. Downstream analyses (trajectory, gene regulatory networks, cell–cell communication, spatial, CRISPR screens, differential abundance, pseudobulk DE) are out of scope for this backbone; add them via the paper-distill → promotion loop.
 
 ## Workflow order
 1. **sc-preprocessing** — CellRanger raw → CellBender → load → doublet flagging (scDblFinder + scrublet) → QC. Per-sample. Flag, never silently drop.
@@ -28,3 +28,4 @@ Each skill carries its core method inline. Outside names that appear are **softw
 - Making any figure → **scientific-plotting**
 - Output paths, palettes, saving rules, methods log, Seurat↔AnnData conversion → **sc-conventions**
 - The universal output / reproducibility contract for any data analysis → **scientific-reproducibility**
+- Learning a method/figure from a paper+code and folding it back into the suite → **sc-paper-distill**

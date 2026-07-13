@@ -1,3 +1,7 @@
+# sc-paper-distill: user-built corpus is local, never published
+skills/sc-paper-distill/references/paper_catalog.csv
+skills/sc-paper-distill/references/omic_marker_db.csv
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db
