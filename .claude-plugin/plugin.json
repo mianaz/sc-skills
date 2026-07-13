@@ -1,0 +1,22 @@
+{
+  "name": "sc-skills",
+  "description": "A Seurat-first core pipeline of 7 Claude Code skills for single-cell RNA-seq analysis — CellBender/decontX preprocessing (sc-preprocessing), Harmony/scVI integration (sc-integration), and marker-verified annotation (sc-annotation), with R-first publication figures (scientific-plotting) under a shared house-conventions and reproducibility contract (sc-conventions, scientific-reproducibility). The single-cell skill orchestrates routing. A deliberately minimal backbone; opinionated (Seurat / R-first); portable SKILL.md format.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Miana",
+    "url": "https://github.com/mianaz"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mianaz/sc-skills",
+  "repository": "https://github.com/mianaz/sc-skills",
+  "keywords": [
+    "single-cell",
+    "scRNA-seq",
+    "seurat",
+    "bioinformatics",
+    "omics",
+    "genomics",
+    "claude-code",
+    "agent-skills"
+  ]
+}
