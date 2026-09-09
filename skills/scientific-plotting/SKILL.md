@@ -1,14 +1,12 @@
 ---
 name: scientific-plotting
-description: "General R-first scientific plotting and figure-polishing skill. Use whenever making, revising, or debugging a scientific plot, figure, visualization, chart, heatmap, volcano plot, dotplot, box/violin/beeswarm, composition plot, time-course, bar/area stack, faceted panel, p-value annotation, label placement, legend/axis cleanup, source-data export, or publication-ready figure. Prefer tidyplots for tidy data and exact statistics, scop for Seurat/single-cell/spatial/omics plots, ggplot2+cowplot/ggh4x for custom layouts, and pheatmap/ComplexHeatmap for matrices."
+description: Use when making, revising, or debugging an R scientific figure (ggplot, scop, heatmap, volcano, composition). Prefer tidyplots, scop, or ggplot2+cowplot.
 ---
 # Scientific Plotting
 
 ## Scope
 
-Use this as the R-first plotting skill for scientific figures, from quick analysis plots to manuscript panels. It is a general scientific plotting skill, not only single-cell.
-
-**Python-native tools with integrated plotting (carve-out to R-first).** When a figure is emitted by a python-native tool whose plotting is an integral, validated part of the method — e.g. the `scib_metrics` scorecard table, `scanpy`/`scvelo`/`cellrank` built-in plots, python `decoupleR` — it is acceptable to keep the python-generated figure as the deliverable rather than re-implementing it in R. The method's own plot is canonical for that method, and re-building it in R risks silently diverging from the tool's numbers/layout. Where cheap, keep **both** versions: the python-native figure (fidelity to the method) plus an R/ggplot restyle (house-style consistency + login-safe re-plot from the saved source table). This carve-out applies only to plots the method emits itself; general figures built from result tables are still R-first.
+Use this as the R-first plotting skill for scientific figures, from quick analysis plots to manuscript panels. It is a general scientific plotting skill (formerly `sc-plotting`), not only single-cell.
 
 For Python-only matplotlib/seaborn work or journal-template sizing, route to `scientific-visualization`. For raw statistical modeling, use the relevant stats skill first, then return here for the figure. For designing a color *system* for a web/artifact/dashboard context, that is `dataviz`; here palettes are fixed (Paired categorical, decoupleR RdBu continuous) per `sc-conventions` and kept semantically consistent across panels — do not re-derive them.
 
@@ -36,6 +34,7 @@ For Python-only matplotlib/seaborn work or journal-template sizing, route to `sc
 | Volcano plots from DE tables | scop or tidyplots/ggplot fallback | `references/volcano.md` |
 | Simple matrix heatmap | pheatmap/RdBu | `references/heatmaps.md` |
 | Annotated heatmap with row/column annotations, splits, side bars | ComplexHeatmap | `references/complexheatmap.md` |
+| Human vs mouse TME: composition violins, archetype cosine heatmaps, chemokine source-cell heatmaps, frequency-coupling matrices, NMF gene-weight scatters, 2×2 GEP-movement KM | ggplot2 + ComplexHeatmap | `references/cross-species-tme.md` |
 | Per-panel stats reporting, editable-text export, image-integrity checklist | reporting/QA contract | `references/stats-and-integrity.md` |
 
 ## Non-Negotiables

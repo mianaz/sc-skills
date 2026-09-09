@@ -3,7 +3,7 @@
 `references/omic_marker_db.csv` is an append-only marker/signature evidence table.
 
 Columns:
-- `paper_id`: digest identifier, e.g. `2024-example`
+- `paper_id`: digest identifier, e.g. `2022-hepatic-macrophage-niches`
 - `marker_or_signature`: gene/protein marker name or signature label
 - `marker_type`: `gene/protein`, `signature`, `ligand signature`, `modeling marker set`, etc.
 - `experiment`: assay where used (flow, scRNA, CITE-seq, Visium, IF, qPCR, WB, etc.)

@@ -4,7 +4,7 @@ Seurat is the source of truth. Export to AnnData/h5ad for Python steps, then
 carry results back. Preserve **raw counts in a layer** (scVI needs counts).
 
 ## Export Seurat → h5ad
-Preferred: scConvert or anndataR; SeuratDisk as fallback.
+Preferred: scConvert (github: mianaz/scConvert) or anndataR; SeuratDisk as fallback.
 ```r
 # SeuratDisk fallback (widely available)
 library(SeuratDisk)
@@ -13,7 +13,7 @@ Convert("objects/seu.h5Seurat", dest = "h5ad", overwrite = TRUE)
 # -> objects/seu.h5ad ; ensure counts are in a layer for scVI
 ```
 ```r
-# scConvert: universal converter, dest sets output format.
+# scConvert (mianaz/scConvert): universal converter, dest sets output format.
 scConvert(seu, dest = "objects/seu.h5ad")
 # reverse direction: scConvert("objects/seu.h5ad", dest = "h5seurat")
 

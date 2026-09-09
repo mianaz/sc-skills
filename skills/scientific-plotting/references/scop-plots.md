@@ -24,7 +24,7 @@ Use `scop` for Seurat-centric single-cell, spatial, and omics plots. This is `me
 
 Lots of published figure code uses **SCP** or **scplotter** (same plot family, e.g. `CellDimPlot`,
 `FeatureDimPlot`). Our fork is `mengxu98/scop`; the *style values transfer*, only some arg names
-differ. (source: Nature 2026)
+differ. (source: sc-paper-distill/papers/2026-human-pregastrula.md F1, M1 — Nature 2026)
 
 | SCP / scplotter | scop fork |
 |---|---|
@@ -81,7 +81,7 @@ compartment (T/NK, B/plasma, myeloid, stromal, parenchymal) rather than one gian
 it doubles as the annotation rationale. Curated liver/TIME marker sets live in
 `sc-annotation/references/markers.md`. Seurat-native fallback when scop is unavailable:
 `Seurat::FeaturePlot(seu, features, ncol = 3, label = TRUE)`.
-(source: Xue et al. Nature 2022)
+(source: sc-paper-distill/papers/2022-scPLC.md F2)
 
 For a top-N marker dotplot straight from `FindAllMarkers`, prefer `FeatureStatPlot(plot_type="dot")`
 below; the Seurat-native fallback is `DotPlot(seu, features) + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))`.
@@ -91,7 +91,7 @@ NOTE: Seurat ≥4 uses `avg_log2FC` — older code (and some published scripts) 
 For atlas-scale figures, compute **one** UMAP and recolor the *same coordinates* by several metadata
 columns (species, stage, tissue, cell type) as a small-multiple — the reader compares panels directly
 because the geometry is fixed. Grey out the context and color only the focal set to spotlight one group.
-(source: Cao et al. Science 2020)
+(source: sc-paper-distill/papers/2020-descartes-fetal-atlas.md F6, F5 — Cao et al. Science 2020)
 
 ```r
 # same embedding recolored by several columns (identical coords across panels)
@@ -117,7 +117,7 @@ scop::CellDimPlot(seu, group.by = "focal", reduction = "umap",
 ## Labeled per-group UMAP small-multiple grid (atlas "table of contents")
 A grid of per-organ (or per-compartment) UMAPs with **on-plot cluster text labels and no side legend** —
 each panel is self-documenting, and an empty grid cell can hold summary stats.
-(source: Cao et al. Science 2020)
+(source: sc-paper-distill/papers/2020-descartes-fetal-atlas.md F1 — Cao et al. Science 2020)
 
 ```r
 organs <- levels(factor(seu$organ))
@@ -160,18 +160,37 @@ p_count <- scop::CellStatPlot(
 
 `CellStatPlot()` also supports plot styles such as bar, rose, ring, pie, trend, area, dot, and sankey. Use percent for composition claims; use count when sample size/cell yield is the point.
 
-## Marker dotplots, violins, and boxes
+## Marker verification dotplot (genes × cell types)
+
+**Use `GroupHeatmap(add_dot = TRUE)`** for canonical-marker panels.  
+Do **not** use `FeatureStatPlot(plot_type = "dot")` — that facets **one gene per panel**.
 
 ```r
 markers <- c("ALB", "APOA1", "KRT19", "PECAM1", "PTPRC")
 
-p_dot <- scop::FeatureStatPlot(
+ht <- scop::GroupHeatmap(
   seu,
-  stat.by = markers,
+  features = markers,
   group.by = "cell_type",
-  plot_type = "dot"
+  add_dot = TRUE,
+  flip = TRUE,                 # genes on x, cell types on y
+  nlabel = 0,                  # avoid duplicate anno_mark labels
+  row_title = character(0),    # suppress group.by name as y title when flip=TRUE
+  column_names_rot = 45,
+  show_row_names = TRUE,
+  show_column_names = TRUE,
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  layer = "data",
+  exp_method = "zscore",
+  lib_normalize = FALSE
 )
+# Save ht$plot with a device larger than heatmap width/height + plot.margin
+```
 
+## Violins / boxes / bars (per-feature by group)
+
+```r
 p_vln <- scop::FeatureStatPlot(
   seu,
   stat.by = markers,
@@ -180,9 +199,9 @@ p_vln <- scop::FeatureStatPlot(
 )
 ```
 
-Prefer `FeatureStatPlot(plot_type = "dot")` for annotation marker panels. Use tidyplots for non-Seurat tidy expression tables.
+Use tidyplots for non-Seurat tidy expression tables.
 
-## Group heatmaps
+## Group heatmaps (no dots)
 
 ```r
 p <- scop::GroupHeatmap(

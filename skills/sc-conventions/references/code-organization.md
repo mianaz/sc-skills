@@ -26,6 +26,7 @@ if (file.exists(ckpt)) {
 Re-running then recomputes only what's missing; deleting one checkpoint recomputes
 just that stage. A cheap, idempotent final step (e.g. applying a manual label map)
 can run **every** time, so editing it + re-running takes effect without recompute.
+Reference implementation: `liver_organoid/analysis/atlas_annotation/analysis.R`.
 
 Env switches are still fine for a single binary mode an outer job sets once
 (`SCRNA_MODE=full`), but not for slicing one analysis into N mutually exclusive

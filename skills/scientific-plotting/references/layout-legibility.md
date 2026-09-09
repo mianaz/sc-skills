@@ -46,7 +46,7 @@ For dense UMAPs, label broad cell types only. If there are more than 12-15 group
 When even a legend with 20-40 long names is hard to map back to the plot, **number each
 population at its median** and decode the numbers with a separate key. Clean on the plot,
 and the key can be a standalone vector PDF for panel assembly (see scientific-reproducibility → figure-output-contract.md).
-(source: Popescu et al. Nature 2019)
+(source: sc-paper-distill/papers/2019-FCA-liver.md F1, F2 — Popescu et al. Nature 2019)
 
 ```r
 library(ggplot2); library(dplyr)
@@ -68,7 +68,7 @@ for very high cardinality.
 
 To emphasize one stage/group/lineage on a UMAP, grey out all other cells **and draw the highlighted
 cells last** so they aren't hidden under the grey context layer. Pair with a composition pie if the
-quantitative makeup matters. (source: Bian, Gong et al. Nature 2020)
+quantitative makeup matters. (source: sc-paper-distill/papers/2020-human-macrophage-dev.md F3 — Bian, Gong et al. Nature 2020)
 
 ```r
 df$grp <- ifelse(df$stage == "CS15", as.character(df$cluster), "others")

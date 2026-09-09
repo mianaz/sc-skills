@@ -2,7 +2,7 @@
 
 Bridging datasets across species (human ↔ mouse, and further) is mostly a **shared-ortholog + anchor**
 problem plus a **principled "no match" gate** so you don't force a 1:1 mapping that doesn't exist.
-(source: Cao et al. Science 2020, human fetal ↔ mouse MOCA)
+(source: sc-paper-distill/papers/2020-descartes-fetal-atlas.md M6 — Cao et al. Science 2020, human fetal ↔ mouse MOCA)
 
 ## Recipe
 

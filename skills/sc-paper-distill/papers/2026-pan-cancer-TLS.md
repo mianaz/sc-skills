@@ -62,7 +62,7 @@ tags: [Homo sapiens, pan-cancer, spatial-transcriptomics, Visium, TLS, immune-mi
 - **Tools / packages:** GSVA, Seurat (FindAllMarkers), rstatix (wilcox_test).
 - **Code:** `tls_ICB_heatmap_07.R:460-515`.
 - **Interpretation:** TLS maturation state 4 (most activated) best predicts ICB response.
-- **Reusable?** Partially → could feed a general ssGSEA-based clinical validation recipe, but the ICB-specific framing limits direct reuse for other analyses.
+- **Reusable?** Partially → could feed a general ssGSEA-based clinical validation recipe, but the ICB-specific framing limits direct reuse for the user's liver atlas work.
 
 ### M6. TCGA survival analysis with cluster-correlation approach
 - **Purpose:** Validate that TLS maturation signatures correlate with patient survival in TCGA.

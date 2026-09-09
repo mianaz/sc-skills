@@ -1,28 +1,40 @@
 # sc-skills
 
-An opinionated, **Seurat-first** core pipeline of [Claude Code](https://www.claude.com/product/claude-code) *Agent Skills* for single-cell RNA-seq analysis — from raw CellRanger output through integration and marker-verified annotation to publication-grade figures, under a shared reproducibility contract — plus a **paper-distillation engine** that grows the suite from the literature.
+An opinionated, **Seurat-first** set of [Claude Code](https://www.claude.com/product/claude-code) *Agent Skills* for single-cell RNA-seq analysis — from finding a public accession or raw CellRanger output through integration, marker-verified annotation, condition tests, and common downstream methods, under a shared reproducibility contract — plus a **paper-distillation engine** that grows the suite from the literature.
 
 Skills are plain `SKILL.md` folders, so they load in Claude Code and (unmodified) in Codex and Cursor skill directories.
 
-## What's inside (8 skills)
+## What's inside (18 skills)
 
 **Orchestration**
 - **single-cell** — entry point; orients an analysis and routes to the right stage.
+- **sc-conventions** — single-cell house rules (Seurat as source of truth, Seurat↔AnnData bridge, palettes, cell-type ordering, figure sizing), layered on **scientific-reproducibility**.
+- **scientific-reproducibility** — universal output contract: dual-version figures, source-data export, exact p-values, publication dpi/vector, a running `methods.md` log, parameter-encoded filenames.
 
-**Core pipeline**
-- **sc-preprocessing** — CellRanger output → analysis-ready Seurat: ambient RNA (CellBender / decontX), doublet flagging, MAD-based QC, gene-symbol standardization.
-- **sc-integration** — batch correction and integrated embeddings; Harmony vs scVI/scANVI, with integration-quality checks.
-- **sc-annotation** — cell-type labels via reference transfer, pretrained models, SingleR, or LLM marker-prompting — every label verified against canonical markers.
+**Ingress & core pipeline**
+- **omic-catalog** — find, browse, and download public omics datasets (GEO, SRA, CellxGene).
+- **sc-dataretrieval** — validate a known accession, pick a deposited format tier, load into Seurat.
+- **sc-preprocessing** — CellRanger (or retrieved) counts → analysis-ready Seurat: ambient RNA (CellBender / decontX), doublet flagging, MAD-based QC. Per-sample; flag, don't drop.
+- **sc-integration** — Harmony, scVI/scANVI, or scGPT embeddings, carried back into the Seurat object, with integration-quality checks.
+- **sc-annotation** — candidate labels via reference transfer, pretrained models, SingleR, or LLM marker-prompting — every label verified against canonical markers.
 
-**Figures & reproducibility standards**
+**Condition tests** (keep split: expression vs composition)
+- **sc-pseudobulk** — sample-level DE and sample PCA (cells are measurements, not replicates).
+- **sc-differential-abundance** — cell-type or neighbourhood proportion shifts (Milo, sccomp, propeller).
+
+**Downstream methods**
+- **sc-trajectory** — pseudotime, RNA velocity, cell fate.
+- **sc-cellchat** — ligand–receptor communication (CellChat).
+- **sc-grn** — TF regulons (pySCENIC, SCENIC+, AUCell).
+- **sc-spatial** — Visium / MERFISH / Xenium / related spatial assays.
+- **sc-crispr** — Perturb-seq / CROP-seq / Mixscape.
+- **sc-target** — scRNA + GWAS / scDRS / Open Targets.
+
+**Figures**
 - **scientific-plotting** — R-first publication plotting (tidyplots, scop, ggplot2 + cowplot/ggh4x, pheatmap/ComplexHeatmap).
-- **sc-conventions** — single-cell house rules (Seurat as source of truth, the Seurat↔AnnData bridge, palettes, cell-type ordering, figure sizing), layered on top of…
-- **scientific-reproducibility** — the universal output contract: dual-version figures, source-data export, exact p-values (not stars), publication dpi/vector, a running `methods.md` log, and parameter-encoded output filenames.
 
 **Growth engine**
-- **sc-paper-distill** — turn a paper + its code into a structured, provenance-tracked digest (methods, figures, visual style, reusable snippets), ending in *Promotion Proposals* that fold vetted recipes back into `scientific-plotting`, `sc-conventions`, and the pipeline skills. This is how the suite **grows with you** instead of staying frozen — read one high-profile paper, promote its best figure/analysis pattern, and every future analysis inherits it. Ships with one worked example digest (a pan-cancer TLS spatial paper); your own corpus stays local.
-
-This is a deliberately minimal backbone — the pipeline stages and standards that every single-cell analysis hangs off, plus the distillation loop that extends it. Downstream methods (trajectory, gene regulatory networks, cell–cell communication, spatial, CRISPR screens, differential abundance, pseudobulk DE) are intentionally out of scope as bundled skills — you grow them in via paper-distill.
+- **sc-paper-distill** — turn a paper + its code into a structured, provenance-tracked digest ending in *Promotion Proposals* that fold vetted recipes back into the suite. User-invoked (call it by name). Ships with several worked example digests; the local marker/paper CSV databases stay gitignored.
 
 ## Install
 
@@ -40,26 +52,17 @@ git clone https://github.com/mianaz/sc-skills.git
 cp -R sc-skills/skills/* ~/.claude/skills/
 ```
 
-Keep all eight together — they cross-reference each other, and `sc-conventions` + `scientific-reproducibility` underlie every stage.
+Keep the suite together — skills cross-reference each other, and `sc-conventions` + `scientific-reproducibility` underlie every stage.
 
 ## Notes
 
-Referenced software (Seurat, scanpy, scVI, scDblFinder, harmony, …) are ordinary R/Python packages — install the ones a step uses; they are libraries, not skills. A few figure recipes cite the published papers their style was drawn from (e.g. *Popescu et al. Nature 2019*, *Cao et al. Science 2020*).
+Referenced software (Seurat, scanpy, scVI, scDblFinder, harmony, CellChat, …) are ordinary R/Python packages — install the ones a step uses; they are libraries, not skills. Figure and method recipes cite the published papers they were drawn from.
 
-## Extending the backbone
+## Extending the suite
 
-This is a starting point, not a ceiling — and `sc-paper-distill` is built to extend it. Two ways to grow:
+**Automated — the distillation loop.** Hand `sc-paper-distill` a paper + its code repo. It writes a digest and proposes promotions. You approve the ones worth keeping; they land in `scientific-plotting`, `sc-conventions`, or a method skill with a back-link to the source paper.
 
-**Automated (recommended) — the distillation loop.** Hand `sc-paper-distill` a paper + its code repo. It reads the methods, figures, and code; writes a provenance-tracked digest; and proposes concrete *Promotion Proposals*. You approve the ones worth keeping, and they land as reusable recipes/requirements in `scientific-plotting`, `sc-conventions`, or a pipeline skill — each carrying a back-link to its source paper. The suite gets sharper every time you read a good paper.
-
-**Manual — add a whole new skill.** To add a pipeline stage or method skill by hand:
-
-1. Drop a `skills/<name>/SKILL.md` folder in (plus any `references/*.md`).
-2. Have it **inherit the contract** — point to `scientific-reproducibility` (dual-version figures, source data, exact p-values, a `methods.md` log) and, for single-cell work, `sc-conventions`.
-3. Add one line to `single-cell`'s **Routing** section so the orchestrator can find it.
-4. Keep the activation `description` bounded to a single intent, so it doesn't collide with an existing skill.
-
-Downstream methods — trajectory, gene regulatory networks, cell–cell communication, spatial, CRISPR screens, differential abundance, pseudobulk DE — all follow this pattern and are the natural next additions.
+**Manual — add a skill.** Drop `skills/<name>/SKILL.md` (plus `references/` as needed), inherit `scientific-reproducibility` / `sc-conventions`, add one routing line to `single-cell`, and keep the activation `description` to a single intent.
 
 ## License
 

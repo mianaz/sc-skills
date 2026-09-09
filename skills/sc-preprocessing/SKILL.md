@@ -1,6 +1,6 @@
 ---
 name: sc-preprocessing
-description: Use when turning CellRanger output into an analysis-ready Seurat object — removing ambient RNA with CellBender (raw) or decontX (R-native, filtered), standardizing gene symbols (HGNChelper), flagging doublets (scDblFinder/scrublet), MAD-based QC with mito/hb/ribo, cell-cycle regression, and protein-coding/multi-study gene filtering for atlases. Per-sample, flag-don't-drop.
+description: Use when turning CellRanger (or retrieved) counts into a per-sample analysis-ready Seurat object — ambient RNA, doublets, MAD QC; flag, don't drop.
 ---
 
 # sc-preprocessing (per-sample)
@@ -9,7 +9,7 @@ description: Use when turning CellRanger output into an analysis-ready Seurat ob
 CellRanger → ambient removal → Seurat → symbol fix → doublet flagging → QC → (atlas filtering). Runs per library before any merge. **Flags** doublets and low-quality cells (does not delete them), so thresholds can be revisited later. Follows sc-conventions for outputs and logging.
 
 ## Entry point
-Starting from a public accession instead of your own CellRanger output? Get it into a Seurat object first (validate the accession, pick the best deposited format, load at the right entry point). True RAW counts enter at step 1; filtered-only matrices use decontX (step 1 alt) or skip ambient removal and flag it.
+Starting from a public accession instead of your own CellRanger output? Use **sc-dataretrieval** first. True RAW counts enter at step 1; filtered-only matrices use decontX (step 1 alt) or skip ambient removal and flag it.
 
 ## Steps
 1. **Ambient RNA:**
@@ -26,7 +26,7 @@ Log ambient method + params, tool versions, QC cutoffs + rationale, and gene-fil
 ## Plate-based data (STRT-seq / Smart-seq), not droplet
 
 This pipeline assumes droplet/10x chemistry. For full-length plate-based data, adjust:
-(source: Bian, Gong et al. Nature 2020)
+(source: sc-paper-distill/papers/2020-human-macrophage-dev.md M7 — Bian, Gong et al. Nature 2020)
 
 - **Skip step 1 (ambient removal) and emptyDrops** — CellBender/decontX/`emptyDrops` assume an empty-droplet
   ambient tail that plate data does not have.
@@ -41,7 +41,7 @@ This pipeline assumes droplet/10x chemistry. For full-length plate-based data, a
 ## Nuclei (snRNA / single-nucleus): count exon + intron
 When you control the count-matrix step for **nuclei** (sci-RNA-seq3, or any re-count from BAM/reads),
 count exon and intron features and **sum them** per gene — do not use exon-only.
-(source: Cao et al. Science 2020)
+(source: sc-paper-distill/papers/2020-descartes-fetal-atlas.md M2 — Cao et al. Science 2020)
 
 - **Why:** nuclear RNA is mostly unspliced pre-mRNA, so most of a nucleus's signal lives in introns.
   Exon-only counting on nuclei discards the majority of UMIs and cripples sensitivity (Cao et al.

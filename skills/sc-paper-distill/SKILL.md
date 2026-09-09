@@ -1,6 +1,7 @@
 ---
 name: sc-paper-distill
-description: "Use when learning from a high-profile single-cell / spatial / omics paper to enrich the sc skill suite — given a paper (URL/DOI/PDF) and its code repo, read the relevant methods, figure captions, and results, read the available code, and produce a structured per-paper digest (methods + figures + visual style + reusable snippets, with provenance) ending in Promotion Proposals that feed concrete recipes and publication-grade requirements into sc-conventions / scientific-plotting / the method skills. Trigger when the user shares a paper+code to learn from, wants to extract a reusable plotting/analysis template from a publication, or wants to update the sc skills from the literature."
+description: Distill a single-cell / spatial / omics paper plus its code into an append-only digest and promotion proposals for the sc skill suite.
+disable-model-invocation: true
 ---
 # Paper Distillation (paper + code → reusable skill knowledge)
 
@@ -9,7 +10,7 @@ description: "Use when learning from a high-profile single-cell / spatial / omic
 This is the **producer** half of a two-part system for growing the sc skill suite from the literature.
 
 - **Producer (this skill):** turn one paper + its code into an append-only, structured **digest** of paper-specific findings — what method, for what purpose, how used, on what data, what visualization, the interpretation — plus extracted reusable code snippets and provenance. Digests are never overwritten; the corpus is the lossless record.
-- **Consumer (the sc suite):** the digest ends with **Promotion Proposals**. Approved proposals are applied into `sc-conventions` (publication-grade requirements / style patterns), `scientific-plotting` (reusable figure recipes), and the pipeline skills (`sc-preprocessing`, `sc-integration`, `sc-annotation`, …). The suite stays lean, curated, and deduplicated.
+- **Consumer (the sc suite):** the digest ends with **Promotion Proposals**. Approved proposals are applied via `superpowers:writing-skills` into `sc-conventions` (publication-grade requirements / style patterns), `scientific-plotting` (reusable figure recipes), and the method skills (`sc-grn`, `sc-annotation`, `sc-preprocessing`, …). The suite stays lean, curated, and deduplicated.
 
 Keep these halves separate. The digest is additive and paper-specific; the suite is curated and cross-paper.
 
@@ -34,7 +35,7 @@ Read `references/digest-schema.md` and `references/extraction-tips.md` before st
 	- Marker rows must include marker/signature, experiment, species, context, claim-use, citation, and provenance source.
 	- If full text or code is unavailable, state `not available` explicitly and tag evidence level (abstract-only, captions-only, methods-only, full-text).
 7. **Present Promotion Proposals.** Show the §5 table. The user approves / edits / rejects each row. This is a hard gate — do not edit the suite before approval.
-8. **Apply approved promotions.** Route each approved row to its target skill, each carrying a provenance back-link `(source: sc-paper-distill/papers/<year>-<shortname>.md F3)`. See `references/promotion.md`. If you have a skill-authoring helper installed (e.g. `superpowers:writing-skills`), use it so the edited skill keeps its quality bar; otherwise edit the target `SKILL.md` directly.
+8. **Apply approved promotions.** Invoke `superpowers:writing-skills` and route each approved row to its target skill, each carrying a provenance back-link `(source: sc-paper-distill/papers/<year>-<shortname>.md F3)`. See `references/promotion.md`.
 
 ## References
 
@@ -55,4 +56,4 @@ Read `references/digest-schema.md` and `references/extraction-tips.md` before st
 - **Note what's missing.** "Figure code not provided — reconstructed from caption" is a finding, not a gap to hide.
 - **Append-only corpus.** Never overwrite a prior digest; add a new one (or a dated revision section) instead.
 - **Approval gate before the suite changes.** §5 proposals are candidates until the user approves them.
-- **Promotions preserve the target skill's quality bar** — use a skill-authoring helper if you have one; either way keep the edit small, provenance-linked, and deduplicated.
+- **Promotions go through `superpowers:writing-skills`** so existing sc skills keep their TDD/quality bar.

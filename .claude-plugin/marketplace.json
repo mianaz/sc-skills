@@ -1,16 +1,16 @@
 {
   "name": "sc-skills",
-  "version": "0.1.0",
-  "description": "Seurat-first single-cell RNA-seq core-pipeline agent-skills for Claude Code.",
+  "version": "0.2.0",
+  "description": "Seurat-first single-cell RNA-seq agent-skills for Claude Code.",
   "owner": {
     "name": "Miana"
   },
   "plugins": [
     {
       "name": "sc-skills",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "source": "./",
-      "description": "8 Seurat-first Claude Code skills for single-cell RNA-seq: preprocessing, integration, marker-verified annotation, R-first publication figures, a shared house-conventions + reproducibility contract, and a paper-distillation engine that grows the suite from the literature. A deliberately minimal core-pipeline backbone.",
+      "description": "18 Seurat-first Claude Code skills for single-cell RNA-seq: catalog/retrieval, preprocessing, integration (including scGPT), marker-verified annotation, condition tests, common downstream methods, R-first publication figures, a shared conventions + reproducibility contract, and a paper-distillation engine.",
       "author": {
         "name": "Miana"
       },
@@ -19,7 +19,8 @@
         "scRNA-seq",
         "seurat",
         "bioinformatics",
-        "omics"
+        "omics",
+        "spatial-transcriptomics"
       ],
       "category": "bioinformatics"
     }

@@ -47,7 +47,7 @@ pdf("figures/heat_clean.pdf", width = 10, height = 3.2); draw(ht_list); dev.off(
 (references/heatmaps.md) is fine. Save dual-version + the matrix as source data (sc-conventions).
 
 ## Row-split with category annotation sidebar
-(source: Cho et al. Science 2026)
+(source: sc-paper-distill/papers/2026-pan-cancer-TLS.md F2)
 
 For marker-by-cluster heatmaps where genes belong to functional categories (e.g. T cells /
 B cells / Initiating / Activated), split rows by category and add a color-coded sidebar.

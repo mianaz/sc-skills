@@ -1,6 +1,6 @@
 ---
 name: scientific-reproducibility
-description: "Use to apply or audit the universal output & reproducibility contract for data analysis in R or Python — dual-version figures, source-data export, exact p-values (not stars), publication dpi/vector, a running methods.md log, param-encoded filenames, and routing compute-heavy steps to a job scheduler. Single-cell work inherits this through sc-conventions; use this directly for non-single-cell analysis. NOT for application/library/infrastructure code or throwaway exploration."
+description: "Use when producing a figure, saving an analysis object, or making an analytical choice in ANY data-analysis / computational-science work (R or Python) — the universal output & reproducibility contract: dual-version figures, source-data export, exact p-values (not stars), publication dpi/vector, a running methods.md log, param-encoded output filenames, and routing compute-heavy steps through the job scheduler. Domain suites (single-cell, bulk RNA-seq, proteomics) inherit this and add their own deltas. NOT for application/library/infrastructure code (use ponytail/simplify) or throwaway one-off exploration."
 ---
 
 # Scientific reproducibility — the output contract
@@ -9,7 +9,7 @@ description: "Use to apply or audit the universal output & reproducibility contr
 Analysis outputs must be **rebuildable and auditable by someone who wasn't there** — including future-you. Every figure ships in two forms with its source data; every choice lands in a log; every expensive run states itself on disk. These are correctness/reproducibility rules, not style preferences.
 
 ## When to use
-Any analysis step that produces a figure, saves a results object, or makes an analytical choice (test, threshold, parameter) — in R or Python. **When NOT:** application/library/infrastructure code (that is general code-simplification territory), or genuinely throwaway exploration you will not report.
+Any analysis step that produces a figure, saves a results object, or makes an analytical choice (test, threshold, parameter) — in R or Python. **When NOT:** application/library/infrastructure code (that's `ponytail`/`simplify` territory), or genuinely throwaway exploration you will not report.
 
 ## Quick reference
 | Concern | Rule | Detail |
@@ -30,7 +30,7 @@ Alignment, model training/integration, large simulations, GPU jobs, and atlas-sc
 Fix names at creation time (annotation, sample sheet), not after outputs exist: letters, digits, `_` only. Slashes, spaces, `@`, and other special characters break file paths, classifiers, and regex parsing with vague downstream errors.
 
 ## Precedence over general code skills
-These reproducibility rules **override** general code-simplification skills for analysis work: do not "simplify away" dual-version plots, source-data exports, exact p-values, dpi/vector output, or the `methods.md` log. Those skills govern glue code and plumbing; they do not trump analysis correctness or reproducibility.
+These reproducibility rules **override** code-simplification skills (`ponytail`, `simplify`) for analysis work: do not "simplify away" dual-version plots, source-data exports, exact p-values, dpi/vector output, or the `methods.md` log. Those skills govern glue code and plumbing; they do not trump analysis correctness or reproducibility.
 
 ## Relationship to domain suites
 Domain conventions **inherit** this contract and add specifics — e.g. `sc-conventions` (single-cell: Seurat source-of-truth, R↔Python bridge, palettes, cell-type ordering). When a domain conventions skill is active, follow it *and* this contract.

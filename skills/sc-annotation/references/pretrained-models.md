@@ -32,7 +32,7 @@ then `predictions, nn_idxs, nn_dists, stats = ca.get_predictions_knn(embeddings)
 Unlike embedding models (SCimilarity/Azimuth) that match to a fixed reference, Garnett trains a
 classifier from a **hand-written marker file** — so it is literature-driven, auditable, and
 independent of your own clustering (a genuine cross-check, not a circular one).
-(source: Cao et al. Science 2020)
+(source: sc-paper-distill/papers/2020-descartes-fetal-atlas.md M4 — Cao et al. Science 2020)
 
 ```r
 library(garnett); library(org.Hs.eg.db)   # Garnett-for-Monocle3

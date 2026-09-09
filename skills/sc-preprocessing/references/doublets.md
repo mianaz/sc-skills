@@ -40,7 +40,7 @@ seu$doublet_consensus <- (seu$scDblFinder.class == "doublet") &
 ## Bioconductor alternative (scran / DropletUtils)
 
 A self-contained alternative stack for groups already in the SCE/Bioconductor world. Not the
-house default (above), but a vetted option. (source: Xue et al. Nature 2022)
+house default (above), but a vetted option. (source: sc-paper-distill/papers/2022-scPLC.md M1, M3 — Xue et al. Nature 2022)
 
 ```r
 # Empty droplets: data-driven lower bound (2nd-smallest total UMI) instead of a fixed number.

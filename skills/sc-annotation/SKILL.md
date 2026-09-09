@@ -1,6 +1,6 @@
 ---
 name: sc-annotation
-description: Use when assigning cell-type identities to single-cell clusters — generating candidate labels via reference-atlas label transfer, pretrained models (SCimilarity, Azimuth), SingleR/celldex, or LLM marker-prompting (GPT-4o/Claude), then confirming every label against canonical (human or mouse) markers with citations using a dotplot, plus AddModuleScore signature scoring (TLS, chemokine, MHC, Ig). Coarse compartments before fine subtypes.
+description: Use when assigning cell-type identities to single-cell clusters — candidate labels, then mandatory canonical-marker verification. Coarse compartments before fine subtypes.
 ---
 
 # sc-annotation
@@ -34,4 +34,4 @@ Automation proposes, markers dispose. Candidate labels come from label transfer 
    See references/cluster-specificity.md.
 
 ## When NOT to use
-Embeddings/clustering inputs → sc-integration. Figures → scientific-plotting.
+Embeddings/clustering inputs → sc-integration. Figures → scientific-plotting. TF/pathway activity per cell → sc-grn.

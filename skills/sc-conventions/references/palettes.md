@@ -33,13 +33,25 @@ pal_many <- function(n) {
 # NOTE: Polychrome::createPalette draws stochastically — set a seed for reproducibility.
 
 # Option B — concatenate every Brewer qualitative set, then recycle (no extra pkgs).
-# (source: Xue et al. Nature 2022)
+# (source: sc-paper-distill/papers/2022-scPLC.md F1 — Xue et al. Nature 2022)
 pal_many_brewer <- function(n) {
   qual <- subset(RColorBrewer::brewer.pal.info, category == "qual")
   cols <- unlist(lapply(rownames(qual), \(p) RColorBrewer::brewer.pal(qual[p, "maxcolors"], p)))
   rep(cols, length.out = n)
 }
 ```
+
+## Human vs mouse species pair
+(source: sc-paper-distill/papers/2026-humu-tme.md §4 — Courau et al. Nat Immunol 2026)
+
+Lock this pair across every cross-species panel. When archetype/genotype already uses color,
+encode species with shape (human = circle, mouse = triangle).
+
+```r
+pal_species <- c(Human = "#4C78A8", Mouse = "#F58518")
+```
+
+## Bind colors by name
 
 Bind colors to names (`names(cols) <- levels(factor(seu$cluster))`) so the mapping stays
 consistent across every panel of a figure. On dense high-k UMAPs, drop on-plot labels
@@ -98,7 +110,7 @@ my_breaks   <- c(seq(-1.25, 0, length.out = ceiling(100 / 2) + 1),
 
 For 0→max data (gene expression on feature plots, pseudotime, density) use a **perceptually-uniform
 sequential** palette — viridis family. Reserve the RdBu diverging ramp above for *signed* data centered
-at 0. (source: Bian, Gong et al. Nature 2020)
+at 0. (source: sc-paper-distill/papers/2020-human-macrophage-dev.md §4, P5 — Bian, Gong et al. Nature 2020)
 
 ```r
 viridisLite::viridis(100)                      # or "magma" / "inferno" / "plasma" / "cividis"

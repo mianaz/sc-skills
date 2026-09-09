@@ -7,7 +7,7 @@ Works against any OpenAI-compatible chat endpoint (OpenAI, OpenRouter → Claude
 ## Inputs
 - `de_markers`: a FindAllMarkers data.frame (cluster, gene, avg_log2FC, p_val_adj).
 - Optional `gsea_data`: per-cluster enriched pathways (named list keyed by cluster) — see the
-  GSEA helper in sc-annotation (or decoupleR) to produce it.
+  GSEA helper in sc-annotation (or sc-grn/decoupleR) to produce it.
 - API key from an env var (`OPENAI_API_KEY` / `OPENROUTER_API_KEY`); never hardcode.
 
 ## Pattern (per cluster)

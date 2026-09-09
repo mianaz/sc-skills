@@ -19,9 +19,9 @@ After writing the digest, present the §5 Promotion Proposals table. The user ap
 
 When a recipe doesn't fit any existing `scientific-plotting` reference, create a new `references/<topic>.md` and add a row to the SKILL.md tool router — don't bloat an unrelated file.
 
-## Apply promotions carefully
+## Apply through writing-skills
 
-Preserve the target skill's quality bar when applying a promotion (baseline → small edit → sanity-check). If you have a skill-authoring helper installed (e.g. `superpowers:writing-skills`), route the edit through it; otherwise edit the target `SKILL.md` directly. Batch the approved rows for one paper into a single pass when they touch the same skill.
+Run approved promotions through `superpowers:writing-skills` so the existing suite keeps its quality bar (baseline → edit → re-test with subagents, per the user's standing convention). Batch the approved rows for one paper into a single writing-skills pass when they touch the same skill.
 
 ## Provenance back-link (mandatory)
 
@@ -29,15 +29,15 @@ Every promoted item carries a back-link to its source digest so the suite stays 
 
 ```r
 # Stacked composition with significance brackets.
-# (source: sc-paper-distill/papers/2024-example.md F4)
+# (source: sc-paper-distill/papers/2026-scPLC.md F4)
 ```
 
 or in prose references:
 
-> Use white tile borders on square heatmaps (source: papers/2024-example.md §4).
+> Use white tile borders on square heatmaps (source: papers/2026-scPLC.md §4).
 
 When a later paper strengthens an existing rule, append its source rather than replacing the first:
-`(source: papers/2024-example.md §4; papers/2025-example2.md §4)`.
+`(source: papers/2026-scPLC.md §4; papers/2027-foo.md §4)`.
 
 ## Dedup before adding
 

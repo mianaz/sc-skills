@@ -3,7 +3,7 @@
 Quantify whether a chosen gene panel actually *separates* your annotated cell types — e.g. before
 committing to a flow-cytometry panel. Frame it as supervised classification on panel genes only,
 and benchmark against sensible ceiling/floor. Diagnostic metric, not a way to assign labels.
-(source: Popescu et al. Nature 2019, "gene discriminatory power", flow-gating analogy.)
+(source: sc-paper-distill/papers/2019-FCA-liver.md M3 — Popescu et al. Nature 2019, "gene discriminatory power", flow-gating analogy.)
 
 ## Recipe
 
