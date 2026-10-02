@@ -21,7 +21,7 @@ Seeded from CellMarker 2.0 / PanglaoDB / Azimuth references. Extend per project;
 
 Vetted lineage panels from a >1M-cell liver-cancer atlas. Use alongside the general rows above.
 Citation for this block: Xue et al. *Nature* 2022, doi:10.1038/s41586-022-05400-x
-(source: sc-paper-distill/papers/2022-scPLC.md F2).
+(source: https://doi.org/10.1038/s41586-022-05400-x).
 
 | cell_type | canonical_markers | tissue/context | citation |
 |---|---|---|---|

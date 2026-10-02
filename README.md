@@ -1,9 +1,8 @@
 # sc-skills
 
-Seurat-first single-cell analysis. Based on the live
-[mianaz/sc-skills](https://github.com/mianaz/sc-skills/tree/0a980b6) repository,
-retrieved 2026-10-02. This package keeps its workflow names and analysis content;
-it moves general plotting and reproducibility to the companion `biomed-skill`.
+Seurat-first single-cell analysis, from public data retrieval through annotation,
+sample-level tests and downstream biology. General plotting and reproducibility
+are provided by the companion [biomed-skill](https://github.com/mianaz/biomed-skills).
 
 ## Workflows
 

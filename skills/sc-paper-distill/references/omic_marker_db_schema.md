@@ -1,6 +1,7 @@
 # omic_marker_db.csv schema
 
-`references/omic_marker_db.csv` is an append-only marker/signature evidence table.
+`omic_marker_db.csv` is a marker/signature evidence table created in the user's
+research output directory. It is not bundled with the skill.
 
 Columns:
 - `paper_id`: digest identifier, e.g. `2022-hepatic-macrophage-niches`

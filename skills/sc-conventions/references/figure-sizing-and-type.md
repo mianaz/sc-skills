@@ -1,7 +1,7 @@
 # Figure sizing & typography
 
 House defaults so figures look consistent and publication-ready, even for plot types without a
-worked example. (source: sc-paper-distill/papers/2026-human-pregastrula.md §4, P1 — "Epiblast diversification and blood formation in a human pregastrula", Nature 2026)
+worked example. (source: https://doi.org/10.1038/s41586-026-10698-y)
 
 ## Typography
 

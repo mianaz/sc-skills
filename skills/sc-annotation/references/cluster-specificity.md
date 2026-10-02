@@ -3,7 +3,7 @@
 Turn "is this cluster a bona-fide, separable cell type?" into a **number with a null**, instead of
 eyeballing marker separation. Use it to decide keep-vs-merge and to defend annotation granularity.
 Diagnostic on the *clustering*, not a way to assign labels.
-(source: sc-paper-distill/papers/2020-descartes-fetal-atlas.md M3 — Cao et al. Science 2020, SVM cross-validation specificity score.)
+(source: https://doi.org/10.1126/science.aba7721)
 
 This complements `panel-discriminatory-power.md`: that tests whether a **small marker panel** separates
 types; this tests whether a cluster/annotation is separable on the **whole transcriptome**.

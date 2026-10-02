@@ -43,7 +43,7 @@ One block per notable figure or panel. Number them F1, F2, …
 - **Data shown:** what's on each axis / what the color & size encode.
 - **Visual style:** palette (named if identifiable), key aesthetic choices (point size, ordering, white borders, faceting, label strategy), layout.
 - **Code:** repo file `path:LL` OR "caption-only — no code provided".
-- **Reusable template:** the minimal snippet to reproduce the *style* on our data (write one even if the paper gave no code — mark it as reconstructed).
+- **Reusable template:** the minimal snippet to reproduce the *style* on the target data (write one even if the paper gave no code — mark it as reconstructed).
 - **Interpretation:** what the reader is meant to conclude.
 - **Reusable?** yes/no → target skill (scientific-plotting / sc-conventions) + one-line what to add.
 

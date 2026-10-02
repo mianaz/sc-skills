@@ -2,7 +2,7 @@
 
 When you need a 2D layout that preserves the **branching topology** of differentiation (UMAP/t-SNE tear or merge connections), use a force-directed graph (ForceAtlas2) **seeded by PAGA** — not UMAP alone. PAGA gives coarse cluster connectivity; `init_pos="paga"` plants the single-cell FA2 layout on it so global branch structure survives while fine structure spreads out. This is the classic haematopoiesis layout.
 
-(source: sc-paper-distill/papers/2019-FCA-liver.md M1, M2, F4 — Popescu et al. Nature 2019; AGA in that paper is the precursor to PAGA.)
+(source: https://doi.org/10.1038/s41586-019-1652-y)
 
 ```python
 import scanpy as sc

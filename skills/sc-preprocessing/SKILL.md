@@ -26,7 +26,7 @@ Log ambient method + params, tool versions, QC cutoffs + rationale, and gene-fil
 ## Plate-based data (STRT-seq / Smart-seq), not droplet
 
 This pipeline assumes droplet/10x chemistry. For full-length plate-based data, adjust:
-(source: sc-paper-distill/papers/2020-human-macrophage-dev.md M7 — Bian, Gong et al. Nature 2020)
+(source: https://doi.org/10.1038/s41586-020-2316-7)
 
 - **Skip step 1 (ambient removal) and emptyDrops** — CellBender/decontX/`emptyDrops` assume an empty-droplet
   ambient tail that plate data does not have.
@@ -41,7 +41,7 @@ This pipeline assumes droplet/10x chemistry. For full-length plate-based data, a
 ## Nuclei (snRNA / single-nucleus): count exon + intron
 When you control the count-matrix step for **nuclei** (sci-RNA-seq3, or any re-count from BAM/reads),
 count exon and intron features and **sum them** per gene — do not use exon-only.
-(source: sc-paper-distill/papers/2020-descartes-fetal-atlas.md M2 — Cao et al. Science 2020)
+(source: https://doi.org/10.1126/science.aba7721)
 
 - **Why:** nuclear RNA is mostly unspliced pre-mRNA, so most of a nucleus's signal lives in introns.
   Exon-only counting on nuclei discards the majority of UMIs and cripples sensitivity (Cao et al.

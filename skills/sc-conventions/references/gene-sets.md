@@ -4,7 +4,7 @@ Reusable gene sets for AddModuleScore, ssGSEA, or marker-based detection. Each c
 provenance so the source paper can be checked.
 
 ## TLS (tertiary lymphoid structure) marker genes
-(source: sc-paper-distill/papers/2026-pan-cancer-TLS.md §4 — Cho et al. Science 2026)
+(source: https://doi.org/10.1126/science.adz2742)
 
 For detecting TLS regions in any tissue via Seurat `AddModuleScore` on spatial or
 scRNA-seq data. These genes mark B-cell-rich lymphoid aggregates associated with
@@ -23,7 +23,7 @@ pancreas, etc.). The score identifies B-cell-dominated lymphoid structures; comb
 with spatial colocalization (sc-spatial) for TLS boundary detection.
 
 ## Courau conserved TME gene expression programs
-(source: sc-paper-distill/papers/2026-humu-tme.md M5–M6 — Courau et al. Nat Immunol 2026)
+(source: https://doi.org/10.1038/s41590-026-02505-7)
 
 Cross-species conserved GEPs. Score T_3 in T cells and My_2 in myeloid cells, then test their
 coordination (a “movement”) and 2×2 survival. Full ranked lists are in the paper’s Supplementary

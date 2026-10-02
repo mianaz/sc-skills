@@ -44,7 +44,7 @@ trig <- biomaRt::getBM(attributes = "external_gene_name", filters = "biotype",
                        mart = ensembl)$external_gene_name
 genes_keep <- union(genes_keep, intersect(rownames(obj), trig))
 ```
-(source: sc-paper-distill/papers/2022-scPLC.md M4 — Xue et al. Nature 2022, kept protein-coding ∪ TR/IG.)
+(source: https://doi.org/10.1038/s41586-022-05400-x)
 
 ## Stress/ribo gene removal before HVG — alternative school, NOT the default
 

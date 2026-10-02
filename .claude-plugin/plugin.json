@@ -1,6 +1,6 @@
 {
   "name": "sc-skills",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Seurat-first single-cell analysis workflows.",
   "author": {
     "name": "Miana"

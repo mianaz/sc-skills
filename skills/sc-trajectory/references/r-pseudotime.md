@@ -2,7 +2,7 @@
 
 When you work in R and don't want the scanpy route, two lightweight options:
 
-(source: sc-paper-distill/papers/2020-human-macrophage-dev.md M2, M3 — Bian, Gong et al. Nature 2020)
+(source: https://doi.org/10.1038/s41586-020-2316-7)
 
 ```r
 # Diffusion pseudotime in R (destiny) — equivalent to scanpy dpt.

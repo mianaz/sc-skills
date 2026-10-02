@@ -1,15 +1,10 @@
 # Extraction tips (finding the paper, reading code, mapping code→figures)
 
-## Asset check order (mandatory)
+## Source order
 
-When starting a new distill, use this order:
-
-1. Ask if the user already has local full text PDF, supplementary files, and code.
-2. If local assets exist, parse them first.
-3. If not, ask for ready links (paper/supp/code).
-4. If no links are provided, resolve links yourself.
-
-Never start web searching before this check unless the user explicitly asks you to.
+Read supplied local PDFs, supplements and code first. Use supplied links next,
+then retrieve missing public material. Ask only when missing information prevents
+identifying the paper or the requested task.
 
 ## Locating the paper from a repo
 
@@ -61,7 +56,7 @@ Most repos ship analysis code and only some plotting code. When figure code is a
 - Extract markers with full context, not as bare gene lists:
 	- experiment (flow/scRNA/CITE/Visium/IF/qPCR/WB), species, and biological context
 	- what claim they support (identity, zonation, perturbation response, niche signaling)
-- Store each marker/signature-context unit as one row in `references/omic_marker_db.csv`.
+- Store each marker/signature-context unit as one row in the output `omic_marker_db.csv`.
 - If a signature is referenced but not fully enumerated in text, log it with a note like `list not fully enumerated in manuscript text`.
 
 ## What counts as "notable" (don't catalog everything)

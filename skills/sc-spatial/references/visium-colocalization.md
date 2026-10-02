@@ -2,7 +2,7 @@
 
 For each Visium spot, compute a weighted colocalization score between two cell types (e.g. B and T cells) using the spot itself and its 6 hexagonal neighbors. Threshold candidate spots by mean + k×SD on colocalization AND per-type proportion. Remove isolated spots via hierarchical clustering (max-linkage, h=1). Generalizes to any two deconvolved cell-type proportions.
 
-(source: sc-paper-distill/papers/2026-pan-cancer-TLS.md M1)
+(source: https://doi.org/10.1126/science.adz2742)
 
 ```r
 # Visium 55µm hex grid: 6 neighbors per spot (col ±2 same row, col ±1 row ±1)

@@ -2,7 +2,7 @@
 
 Segment tissue regions from H&E images, then assign each Visium spot to its enclosing region. Useful for TLS detection, tumor/stroma annotation, or necrosis delineation. Per-sample threshold tuning is required.
 
-(source: sc-paper-distill/papers/2026-pan-cancer-TLS.md M2)
+(source: https://doi.org/10.1126/science.adz2742)
 
 ```python
 from skimage import color, morphology, measure, segmentation

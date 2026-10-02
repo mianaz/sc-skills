@@ -19,25 +19,20 @@ After writing the digest, present the §5 Promotion Proposals table. The user ap
 
 When a recipe doesn't fit any existing `scientific-plotting` reference, create a new `references/<topic>.md` and add a row to the SKILL.md tool router — don't bloat an unrelated file.
 
-## Apply through writing-skills
+## Apply requested changes
 
-Run approved promotions through `superpowers:writing-skills` so the existing suite keeps its quality bar (baseline → edit → re-test with subagents, per the user's standing convention). Batch the approved rows for one paper into a single writing-skills pass when they touch the same skill.
+Use an available skill-authoring tool or edit the target skill directly. Keep
+the change scoped to the requested reuse case and run its relevant example or
+check. Shared plotting and reproducibility changes belong in biomed-skill;
+single-cell analysis changes belong in sc-skills.
 
-## Provenance back-link (mandatory)
+## Cite the published source
 
-Every promoted item carries a back-link to its source digest so the suite stays traceable:
-
-```r
-# Stacked composition with significance brackets.
-# (source: sc-paper-distill/papers/2026-scPLC.md F4)
-```
-
-or in prose references:
-
-> Use white tile borders on square heatmaps (source: papers/2026-scPLC.md §4).
-
-When a later paper strengthens an existing rule, append its source rather than replacing the first:
-`(source: papers/2026-scPLC.md §4; papers/2027-foo.md §4)`.
+Every promoted item carries the original paper's DOI or source URL and the
+relevant figure or Methods locator. Code snippets also name the repository,
+commit and file. Keep personal digest IDs in the user's output directory rather
+than making distributed references depend on unpublished notes. When several
+papers support a recipe, retain each relevant source.
 
 ## Dedup before adding
 
@@ -45,7 +40,7 @@ Before adding a `requirement` or `palette`, check whether `sc-conventions` alrea
 
 ## Marker/signature promotions
 
-Marker/signature rows in `references/omic_marker_db.csv` are evidence inventory, not automatic skill rules. Promote only when:
+Marker/signature rows in the output `omic_marker_db.csv` are evidence inventory, not automatic skill rules. Promote only when:
 
 - the same marker/signature pattern appears across multiple papers, or
 - a marker panel is central and well-validated for a narrow domain (for example, liver KC identity).

@@ -2,7 +2,7 @@
 
 After AUCell (pipeline stage 3), to report which regulons mark which clusters, binarize the AUCell matrix and aggregate per cluster.
 
-(source: sc-paper-distill/papers/2020-human-macrophage-dev.md M6 — Bian, Gong et al. Nature 2020)
+(source: https://doi.org/10.1038/s41586-020-2316-7)
 
 ```r
 # bin: binary regulon-activity matrix (regulons × cells), from AUCell_exploreThresholds()/binarize.

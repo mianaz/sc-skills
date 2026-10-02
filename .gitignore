@@ -8,3 +8,7 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+
+# Generated research notes stay in the user workspace.
+skills/sc-paper-distill/papers/
+AGENTS.md

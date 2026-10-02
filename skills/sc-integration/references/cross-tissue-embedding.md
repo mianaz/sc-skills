@@ -4,7 +4,7 @@ To study **one cell class across many tissues at once** (blood / endothelial / e
 across every organ), don't just merge everything and hope — the largest tissue dominates the embedding
 and swamps the shared program you're trying to see. Downsample per type-per-tissue, then build the
 embedding on a **marker-gene set**, not all HVGs.
-(source: sc-paper-distill/papers/2020-descartes-fetal-atlas.md M5 — Cao et al. Science 2020)
+(source: https://doi.org/10.1126/science.aba7721)
 
 ## Recipe
 
