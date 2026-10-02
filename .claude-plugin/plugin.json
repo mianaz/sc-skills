@@ -1,23 +1,11 @@
 {
   "name": "sc-skills",
-  "description": "Seurat-first Claude Code skills for single-cell RNA-seq: catalog and retrieval, CellBender/decontX preprocessing, Harmony/scVI/scGPT integration, marker-verified annotation, sample-level DE and differential abundance, trajectory, CellChat, GRN, spatial, Perturb-seq, and target prioritisation, plus R-first publication figures under a shared conventions and reproducibility contract. The single-cell skill routes; sc-paper-distill grows the suite from the literature.",
-  "version": "0.2.0",
+  "version": "0.3.0",
+  "description": "Seurat-first single-cell analysis workflows.",
   "author": {
-    "name": "Miana",
-    "url": "https://github.com/mianaz"
+    "name": "Miana"
   },
   "license": "MIT",
   "homepage": "https://github.com/mianaz/sc-skills",
-  "repository": "https://github.com/mianaz/sc-skills",
-  "keywords": [
-    "single-cell",
-    "scRNA-seq",
-    "seurat",
-    "bioinformatics",
-    "omics",
-    "genomics",
-    "spatial-transcriptomics",
-    "claude-code",
-    "agent-skills"
-  ]
+  "repository": "https://github.com/mianaz/sc-skills"
 }
