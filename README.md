@@ -1,71 +1,41 @@
 # sc-skills
 
-An opinionated, **Seurat-first** set of [Claude Code](https://www.claude.com/product/claude-code) *Agent Skills* for single-cell RNA-seq analysis — from finding a public accession or raw CellRanger output through integration, marker-verified annotation, condition tests, and common downstream methods, under a shared reproducibility contract — plus a **paper-distillation engine** that grows the suite from the literature.
+Seurat-first single-cell analysis. Based on the live
+[mianaz/sc-skills](https://github.com/mianaz/sc-skills/tree/0a980b6) repository,
+retrieved 2026-10-02. This package keeps its workflow names and analysis content;
+it moves general plotting and reproducibility to the companion `biomed-skill`.
 
-Skills are plain `SKILL.md` folders, so they load in Claude Code and (unmodified) in Codex and Cursor skill directories.
+## Workflows
 
-## What's inside (18 skills)
+| Stage | Skills |
+|---|---|
+| Entry and conventions | `single-cell`, `sc-conventions` |
+| Data discovery and retrieval | `omic-catalog`, `sc-dataretrieval` |
+| Core analysis | `sc-preprocessing`, `sc-integration`, `sc-annotation` |
+| Sample-level condition tests | `sc-pseudobulk`, `sc-differential-abundance` |
+| Downstream biology | `sc-trajectory`, `sc-cellchat`, `sc-grn`, `sc-spatial`, `sc-crispr`, `sc-target` |
+| Single-cell literature methods | `sc-paper-distill` |
 
-**Orchestration**
-- **single-cell** — entry point; orients an analysis and routes to the right stage.
-- **sc-conventions** — single-cell house rules (Seurat as source of truth, Seurat↔AnnData bridge, palettes, cell-type ordering, figure sizing), layered on **scientific-reproducibility**.
-- **scientific-reproducibility** — universal output contract: dual-version figures, source-data export, exact p-values, publication dpi/vector, a running `methods.md` log, parameter-encoded filenames.
+## Shared dependency
 
-**Ingress & core pipeline**
-- **omic-catalog** — find, browse, and download public omics datasets (GEO, SRA, CellxGene).
-- **sc-dataretrieval** — validate a known accession, pick a deposited format tier, load into Seurat.
-- **sc-preprocessing** — CellRanger (or retrieved) counts → analysis-ready Seurat: ambient RNA (CellBender / decontX), doublet flagging, MAD-based QC. Per-sample; flag, don't drop.
-- **sc-integration** — Harmony, scVI/scANVI, or scGPT embeddings, carried back into the Seurat object, with integration-quality checks.
-- **sc-annotation** — candidate labels via reference transfer, pretrained models, SingleR, or LLM marker-prompting — every label verified against canonical markers.
+Install [`biomed-skill`](https://github.com/mianaz/biomed-skills) alongside this package for `scientific-plotting` and
+`scientific-reproducibility`. Stage skills refer to those shared names; they have
+one implementation in biomed-skill. `sc-paper-distill` stays specific to omics
+method curation. General paper reading and evidence maps belong in biomed-skill.
 
-**Condition tests** (keep split: expression vs composition)
-- **sc-pseudobulk** — sample-level DE and sample PCA (cells are measurements, not replicates).
-- **sc-differential-abundance** — cell-type or neighbourhood proportion shifts (Milo, sccomp, propeller).
-
-**Downstream methods**
-- **sc-trajectory** — pseudotime, RNA velocity, cell fate.
-- **sc-cellchat** — ligand–receptor communication (CellChat).
-- **sc-grn** — TF regulons (pySCENIC, SCENIC+, AUCell).
-- **sc-spatial** — Visium / MERFISH / Xenium / related spatial assays.
-- **sc-crispr** — Perturb-seq / CROP-seq / Mixscape.
-- **sc-target** — scRNA + GWAS / scDRS / Open Targets.
-
-**Figures**
-- **scientific-plotting** — R-first publication plotting (tidyplots, scop, ggplot2 + cowplot/ggh4x, pheatmap/ComplexHeatmap).
-
-**Growth engine**
-- **sc-paper-distill** — turn a paper + its code into a structured, provenance-tracked digest ending in *Promotion Proposals* that fold vetted recipes back into the suite. User-invoked (call it by name). Ships with several worked example digests; the local marker/paper CSV databases stay gitignored.
-
-## Install
-
-**As a Claude Code plugin (recommended):**
+For Claude Code:
 
 ```bash
+claude plugin marketplace add mianaz/biomed-skills
+claude plugin install biomed-skill@biomed-skill
 claude plugin marketplace add mianaz/sc-skills
 claude plugin install sc-skills@sc-skills
 ```
 
-**Or copy the skill folders manually:**
+For Codex or Cursor, copy both packages' skill folders into the same agent skill
+directory, preserving existing local edits before replacement.
 
-```bash
-git clone https://github.com/mianaz/sc-skills.git
-cp -R sc-skills/skills/* ~/.claude/skills/
-```
+Example: “Use $single-cell to analyze these samples, then use
+$scientific-plotting for the requested figures.”
 
-Keep the suite together — skills cross-reference each other, and `sc-conventions` + `scientific-reproducibility` underlie every stage.
-
-## Notes
-
-Referenced software (Seurat, scanpy, scVI, scDblFinder, harmony, CellChat, …) are ordinary R/Python packages — install the ones a step uses; they are libraries, not skills. Figure and method recipes cite the published papers they were drawn from.
-
-## Extending the suite
-
-**Automated — the distillation loop.** Hand `sc-paper-distill` a paper + its code repo. It writes a digest and proposes promotions. You approve the ones worth keeping; they land in `scientific-plotting`, `sc-conventions`, or a method skill with a back-link to the source paper.
-
-**Manual — add a skill.** Drop `skills/<name>/SKILL.md` (plus `references/` as needed), inherit `scientific-reproducibility` / `sc-conventions`, add one routing line to `single-cell`, and keep the activation `description` to a single intent.
-
-## License
-
-MIT © 2026 Miana ([@mianaz](https://github.com/mianaz)).
-
-Recipes drawn from published figures cite their sources; those methods remain the intellectual property of their respective authors, referenced here under fair-use scholarly attribution.
+MIT; upstream attribution is retained in LICENSE.

@@ -10,6 +10,10 @@ Opinionated single-cell RNA-seq workflow. **The Seurat object is the source of t
 
 **sc-conventions underlies all stages.** Read it first.
 
+Install the companion `biomed-skill` package for `scientific-plotting` and
+`scientific-reproducibility`. These shared skills have one owner and are not
+copied into sc-skills. Single-cell figure recipes remain in scientific-plotting.
+
 ## Workflow order
 0. **sc-dataretrieval** (public accession, not your own CellRanger output) — validate, pick deposited format, load at the right entry point. Discovering datasets before you have an accession → `omic-catalog`.
 1. **sc-preprocessing** — CellRanger raw → CellBender → load → doublet flagging → QC. Per-sample. Flag, never silently drop.
