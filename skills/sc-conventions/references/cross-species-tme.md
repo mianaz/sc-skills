@@ -32,6 +32,8 @@ Granulocytes / PMN-MDSCs are outside the Courau myeloid GEP set — keep them as
 The conserved prognostic unit in Courau is T-cell cytotoxicity (T_3: PRF1, LAG3, GZMB, NKG7)
 co-occurring with myeloid IFN response (My_2: IFIT2, IFIT3, ISG15, CXCL10). Stratify survival
 as a 2×2 (T_3 Hi/Lo × My_2 Hi/Lo). Myeloid-high vs low is a different, often opposite, axis.
+The genes named here illustrate the programs. For scoring, retrieve the full
+source lists and follow the [gene-set selection and storage rules](gene-sets.md).
 (source: https://doi.org/10.1038/s41590-026-02505-7)
 
 Prefer scRNA-vs-scRNA over bulk-sorted-human vs scRNA-mouse; the latter underestimates conservation.

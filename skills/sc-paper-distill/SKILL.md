@@ -28,6 +28,14 @@ version, normalization and input layer, analysis unit and key parameters; separa
 score calculation from display scaling and group averaging. State the z-score
 axis/reference/aggregation or GSEA ranking statistic and contrast where applicable.
 
+When extracting literature gene sets, search and update the user-owned shared
+library described in [gene-set reuse](../sc-conventions/references/gene-sets.md).
+Save complete source membership, citation and locator once; link subsequent
+digests and marker-table rows to that record. Mark partial lists `incomplete`.
+For new per-cell reuse, prefer UCell and record the paper's original scoring
+method separately. Saving a library record is part of source curation; changes
+to skill instructions still follow the promotion process below.
+
 End with concrete reuse proposals when useful. A reading task does not authorize
 editing installed skills. For requested skill changes, follow
 [references/promotion.md](references/promotion.md); use available skill-authoring

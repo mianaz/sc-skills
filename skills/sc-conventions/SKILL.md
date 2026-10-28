@@ -16,7 +16,8 @@ Single-cell-specific conventions. **Inherits `scientific-reproducibility`** — 
 | Palettes | Paired categorical; viridis sequential; decoupleR RdBu diverging; bind colors by name | references/palettes.md |
 | Cell-type order | one canonical `levels` vector shared by UMAP legend + dotplot; `scop` palcolor is positional | references/palettes.md |
 | Naming consistency | one canonical name per cell type / gene / sample / metric across scripts, panels, captions; don't invent labels; flag collisions | references/terminology-ledger.md |
-| Reference gene sets | curated marker gene lists (TLS, Courau T_3/My_2, etc.) for AddModuleScore/ssGSEA with provenance | references/gene-sets.md |
+| Gene-set scoring | prefer UCell; use cited published sets/data or reproducible, unbiased DE signatures from the user's data; never invent a set heuristically | [references/gene-sets.md](references/gene-sets.md) |
+| Gene-set resources and reuse | check the shared library first; save complete literature sets with their source and context | [references/gene-set-resources.md](references/gene-set-resources.md) |
 | Cross-species TME | map mouse into a published human taxonomy; archetype-restricted couplings; NMF Jaccard + gene-weight scatter; GEP movements not isolated myeloid scores | references/cross-species-tme.md |
 | Relabel sweeps | after changing labels/columns on an object, grep every downstream consumer for old label values + column names before re-running | stale `%in%`/subset refs drop cells or select the wrong subset **silently** (no error) → wrong-but-clean results |
 | Figure sizing | pt.size-by-density, save dims by plot type, rasterize points layer only | references/figure-sizing-and-type.md |

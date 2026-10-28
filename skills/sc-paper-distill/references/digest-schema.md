@@ -71,7 +71,7 @@ Include one markdown table row with:
 |---|---|---|---:|---|---|
 | ... | ... | ... | ... | ... | ... |
 
-And persist the same row in `references/paper_catalog.csv`.
+And persist the same row in `paper_catalog.csv` beside the output digests.
 
 ### 6.2 Marker/signature curation table
 
@@ -81,7 +81,8 @@ Include a marker/signature table with at least these columns:
 |---|---|---|---|---|---|---|---|
 | ... | ... | ... | ... | ... | ... | ... | ... |
 
-Then append rows to `references/omic_marker_db.csv`.
+Then append rows to `omic_marker_db.csv` beside the output digests. For signatures,
+include `gene_set_id`, `gene_set_record` and `membership_status` from the shared library.
 
 Use one row per marker/signature-context pair (do not merge unrelated contexts into one row).
 

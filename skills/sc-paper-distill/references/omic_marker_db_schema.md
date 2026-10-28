@@ -15,9 +15,15 @@ Columns:
 - `citation`: full citation anchor (DOI at minimum)
 - `notes`: caveats and details
 - `added_on`: YYYY-MM-DD
+- `gene_set_id`: shared-library set ID for a signature; empty for individual markers
+- `gene_set_record`: path to its versioned JSON definition in the [shared library](../../sc-conventions/references/gene-sets.md)
+- `membership_status`: `complete` or `incomplete` for a signature
 
 Curation rules:
 - One row per marker/signature-context pair.
 - Do not infer markers that are not explicitly present in paper text/figures/tables.
-- If a signature is named but not fully listed, store the named signature and add a caveat in `notes`.
+- If a signature is named but not fully listed, save an `incomplete` library record
+  with the source locator and the missing information in `notes`; exclude it from scoring.
+- Store complete gene membership in the shared-library record and link it here.
+  Reuse the same record across digests rather than copying partial gene lists.
 - Keep rows factual; interpretation belongs in digest files.

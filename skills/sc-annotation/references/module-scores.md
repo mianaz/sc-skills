@@ -1,50 +1,74 @@
-# Module / signature scores (AddModuleScore)
+# Gene-set scores with UCell
 
-Score a published gene signature per cell — TLS imprint, 12-chemokine, MHC-I/II, immunoglobulin,
-etc. Use for state/program scoring on top of discrete cell-type labels.
+Apply the [shared source and reuse rules](../../sc-conventions/references/gene-sets.md)
+before running this recipe. Prefer `UCell::AddModuleScore_UCell` for per-cell
+signatures. It ranks expression within each cell, so the unsmoothed score for a
+fixed cell, gene universe and signature does not depend on which other cells are
+included. See [Andreatta and Carmona, 2021](https://doi.org/10.1016/j.csbj.2021.06.043)
+and the [current UCell manual](https://bioconductor.org/packages/release/bioc/manuals/UCell/man/UCell.pdf).
 
-```r
-# AddModuleScore appends a column named <name><k>; rename to drop the trailing index.
-seu <- Seurat::AddModuleScore(seu, features = list(tls_genes), name = "TLS")
-seu$`TLS-imprint` <- seu$TLS1; seu$TLS1 <- NULL
-```
+## Score a saved set
 
-## Build gene-family scores by pattern (mouse examples)
-```r
-mhc1 <- grep("^H2-(K|D|L|T|Q|M)", rownames(seu), value = TRUE)
-mhc2 <- grep("^H2-(A|E)",          rownames(seu), value = TRUE)
-ig   <- grep("^Ig[lkh]",           rownames(seu), value = TRUE)
-for (s in list(c("MHC-I", "mhc1"), c("MHC-II", "mhc2"), c("Ig", "ig"))) {
-  seu <- Seurat::AddModuleScore(seu, features = list(get(s[2])), name = s[1])
-  seu[[s[1]]] <- seu[[paste0(s[1], "1")]]; seu[[paste0(s[1], "1")]] <- NULL
-}
-```
-
-## Example published signatures (cite the source paper in methods.md)
-- **TLS imprint** (Meylan et al., tertiary lymphoid structures): Ig genes (Igha/Ighg*/Igkc/Iglc*/Jchain),
-  B markers (Cd79a, Mzb1, Xbp1, Fcrl5, Ssr4), T (Trbc2, Il7r), fibroblast (Cxcl12, Lum),
-  complement (C1qa, C7), plus Cd52/Apoe/Pim2/Derl3.
-- **12-chemokine TLS signature**: Ccl2/3/4/5/8/19/21, Cxcl9/10/11/13, Ccl17 (mouse orthologs;
-  Ccl18 has no mouse ortholog — substitute Ccl8/Ccl17).
-
-Scores are relative within a dataset. Compare across groups with a test + exact p-value
-(sc-conventions); visualize as violin (tidyplots) or dotplot (scientific-plotting). For human signatures
-in a mouse object, map orthologs first (sc-preprocessing/gene-symbols.md). UCell is an
-alternative scorer that is rank-based and less sensitive to library size.
-
-## Bridge: derive a signature from BULK, project onto single cells
-
-A recurring cross-modality pattern (e.g. a bulk-defined cell-type/program signature scored per single cell). Direction bulk → sc:
+The example assumes a complete, unweighted, species-matched record selected from
+the shared library. `signature_file` is its path. Use the full RNA gene universe
+with raw counts or nonnegative log-normalized expression. For a Seurat v5 object
+with split counts layers, join the RNA layers before this example. Avoid scaled
+or integrated expression and matrices restricted to signature genes or HVGs.
 
 ```r
-# 1. Signature from a bulk DE table (DESeq2/edgeR): top up-genes for the state/type of interest.
-sig <- subset(bulk_de, padj < 0.05 & log2FoldChange > 1)
-sig <- head(sig[order(-sig$log2FoldChange), "gene"], 100)      # ~50-200 genes
-sig <- intersect(sig, rownames(seu))                            # map orthologs first if cross-species
+record <- jsonlite::read_json(signature_file, simplifyVector = TRUE)
+stopifnot(record$status == "complete", length(record$weights) == 0L)
+up <- unique(unlist(record$genes_up))
+down <- unique(unlist(record$genes_down))
+members <- data.frame(
+  original_gene = c(up, down),
+  direction = rep(c("up", "down"), c(length(up), length(down))))
+members$mapped_gene <- members$original_gene  # same-species example
+members$present <- members$mapped_gene %in% rownames(seu[["RNA"]])
+members$used_gene <- ifelse(members$present, members$mapped_gene, NA_character_)
+stopifnot(any(members$present))
 
-# 2. Score per cell (UCell preferred here — rank-based, robust to the bulk/sc platform gap).
-seu <- UCell::AddModuleScore_UCell(seu, features = list(bulk_sig = sig))
-# then: violin/dotplot of bulk_sig_UCell across cell types; test enrichment in the expected type.
+out <- file.path("source_data", "gene_sets", record$set_id)
+dir.create(out, recursive = TRUE, showWarnings = FALSE)
+file.copy(signature_file, file.path(out, "definition.json"), overwrite = TRUE)
+write.csv(members, file.path(out, "genes_original_and_used.csv"), row.names = FALSE)
+
+features <- setNames(list(c(up, paste0(down, "-", recycle0 = TRUE))), record$set_id)
+seu <- UCell::AddModuleScore_UCell(
+  seu, features = features, assay = "RNA", slot = "counts",
+  maxRank = 1500, missing_genes = "impute", w_neg = 1,
+  ties.method = "average", BPPARAM = BiocParallel::SerialParam(), name = "_UCell")
+score_column <- paste0(record$set_id, "_UCell")
+write.csv(data.frame(cell = colnames(seu), score = seu[[score_column]][, 1]),
+          file.path(out, "scores.csv"), row.names = FALSE)
+saveRDS(list(method = "UCell::AddModuleScore_UCell",
+             UCell_version = as.character(packageVersion("UCell")),
+             assay = "RNA", layer = "counts", normalization = "raw counts",
+             maxRank = 1500, missing_genes = "impute", w_neg = 1,
+             ties.method = "average", parallel_backend = "SerialParam", smoothing = "none",
+             n_original = nrow(members), n_present = sum(members$present)),
+        file.path(out, "scoring_parameters.rds"))
 ```
 
-**Validate in the reverse direction** rather than trusting the projection alone: **pseudobulk the single-cell object** (→ `sc-pseudobulk`) and check that the signature genes' pseudobulk fold-changes agree with the bulk fold-changes (Spearman of logFCs, or a scatter). Concordant fold-changes + enrichment in the expected cell type = a trustworthy bridge; enrichment without fold-change concordance often means the signature is capturing library-size/ambient signal, not the biology. Cite the bulk source and record both checks in methods.md.
+`missing_genes = "impute"` retains the source definition and treats absent genes
+as zero expression. Inspect coverage before interpreting scores. Choose `maxRank`
+using the number of detected features and assay depth; 1500 is the whole-transcriptome
+default. Targeted spatial panels need a panel-appropriate value and adequate set
+coverage. Save any change in the scoring record.
+
+UCell supports signed sets through `+`/`-` suffixes. Preserve the source directions
+and record `w_neg`. Weighted signatures retain their published model unless an
+unweighted adaptation is explicitly justified and labeled. Keep unsmoothed scores
+as the primary output; label and record any optional neighbor smoothing separately.
+
+## Compare and reuse
+
+Summarize scores within each sample and cell type. Use the biological replicate
+for condition tests and record any display scaling separately. Select a plot for
+the comparison through `scientific-plotting`.
+
+For a bulk-DE signature projected onto single cells, retain the full bulk DE
+table and selection rule in its library record. When matched contrasts exist,
+compare its direction with sample-level pseudobulk DE through `sc-pseudobulk`.
+Label the single-cell UCell result as an adaptation when the original paper used
+another scoring method; retain the original method in the definition record.

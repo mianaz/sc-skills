@@ -15,6 +15,18 @@ are provided by the companion [biomed-skill](https://github.com/mianaz/biomed-sk
 | Downstream biology | `sc-trajectory`, `sc-cellchat`, `sc-grn`, `sc-spatial`, `sc-crispr`, `sc-target` |
 | Single-cell literature methods | `sc-paper-distill` |
 
+## Gene sets
+
+Prefer UCell for per-cell gene-set scoring. Use cited published signatures/data
+or unbiased DE signatures from the user's data. Never invent a gene set heuristically.
+See the [scoring and reuse rules](skills/sc-conventions/references/gene-sets.md)
+and the [curated resource guide](skills/sc-conventions/references/gene-set-resources.md).
+
+Keep reusable literature sets in `SC_GENE_SET_HOME`, defaulting to
+`~/.local/share/sc-skills/gene-sets/`. The suite includes a source-checked
+[12-chemokine human signature](skills/sc-conventions/assets/gene-sets/messina_2012_tls_12chemokine_human_v1.json)
+as a starter record. Third-party records retain the source terms recorded with each set.
+
 ## Shared dependency
 
 Install [`biomed-skill`](https://github.com/mianaz/biomed-skills) alongside this package for `scientific-plotting` and

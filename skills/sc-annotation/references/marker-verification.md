@@ -3,6 +3,8 @@
 No label is trusted until confirmed by canonical markers with citations.
 
 1. Pull candidate cell types' markers + PMID/DOI from references/markers.md.
+   For additional contexts, query the [curated marker resources](../../sc-conventions/references/gene-set-resources.md)
+   and retain the species, tissue, evidence class and original supporting study.
 2. Build a marker **dotplot** via `scop::GroupHeatmap(features, group.by, add_dot = TRUE)`
    (genes × cell types; see memory `scop-marker-dotplot.md`). Do **not** use
    `FeatureStatPlot(plot_type = "dot")` (facets one gene per panel). Genes grouped by

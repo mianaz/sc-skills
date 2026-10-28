@@ -26,6 +26,7 @@ copied into sc-skills. Single-cell figure recipes remain in scientific-plotting.
 - Ambient RNA, doublets, QC → **sc-preprocessing**
 - Batch correction / latent embeddings / scGPT → **sc-integration**
 - Cell-type identities → **sc-annotation**
+- Gene-set scoring or signature curation → **sc-conventions** [gene-set rules](../sc-conventions/references/gene-sets.md), then **sc-annotation** [UCell recipe](../sc-annotation/references/module-scores.md)
 - Any figure → **scientific-plotting**
 - Output paths, palettes, Seurat↔AnnData, methods log → **sc-conventions**
 - Trajectory / pseudotime / RNA velocity / lineage → **sc-trajectory**

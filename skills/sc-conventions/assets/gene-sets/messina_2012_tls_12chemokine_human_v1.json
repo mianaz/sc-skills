@@ -1,0 +1,23 @@
+{
+  "set_id": "messina_2012_tls_12chemokine_human_v1",
+  "name": "Human 12-chemokine signature associated with lymph node-like structures",
+  "version": 1,
+  "status": "complete",
+  "source_type": "published_signature",
+  "species": "Homo sapiens",
+  "gene_id_type": "gene_symbol",
+  "context": "Human solid tumors; examined in metastatic melanoma for association with tumor-localized lymph node-like structures.",
+  "citation": "Messina JL et al. Scientific Reports 2, 765 (2012). doi:10.1038/srep00765; PMID:23097687.",
+  "source_url": "https://www.nature.com/articles/srep00765",
+  "source_locator": "Results, first paragraph: the full 12-chemokine list and the original PCA scoring method.",
+  "source_version": "Published article, 2012-10-24",
+  "retrieved_on": "2026-10-28",
+  "genes_up": ["CCL2", "CCL3", "CCL4", "CCL5", "CCL8", "CCL18", "CCL19", "CCL21", "CXCL9", "CXCL10", "CXCL11", "CXCL13"],
+  "genes_down": [],
+  "weights": [],
+  "original_scoring": "First principal component of log2 gene-expression intensities across the 12 genes; fitted PCA weights are not supplied in this membership record.",
+  "selection_rule": "All 12 genes listed in the first Results paragraph, in source order; no additions, substitutions or expression-based filtering.",
+  "source_files": [],
+  "source_license": "Article: CC BY-NC-ND 3.0 (https://creativecommons.org/licenses/by-nc-nd/3.0/). This record contains the factual gene membership and original metadata, not article text or figures.",
+  "notes": "Per-cell UCell scoring is an adaptation of the published tissue-level signature. Assess spatial organization when interpreting TLS. For mouse use, derive a separate record from documented ortholog mappings and retain all unmapped genes."
+}

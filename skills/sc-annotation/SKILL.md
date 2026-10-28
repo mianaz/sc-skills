@@ -21,10 +21,10 @@ Automation proposes, markers dispose. Candidate labels come from label transfer 
 3. **MANDATORY:** canonical-marker dotplot verification (references/marker-verification.md) using
    references/markers.md (human) or references/markers-mouse-immune.md (mouse), both cited.
 4. Assign identities; log supporting markers + citations + which automated methods agreed in methods.md.
-5. **Optional — signature/state scores:** AddModuleScore for published programs (TLS, 12-chemokine,
-   MHC-I/II, Ig), or a signature derived from a **bulk** DE table projected onto cells (bulk→sc
-   bridge, with pseudobulk reverse-validation). See references/module-scores.md. Compare across
-   groups with a test + exact p-value.
+5. **Optional — signature/state scores:** prefer UCell. First apply the shared
+   [gene-set rules](../sc-conventions/references/gene-sets.md), then use the
+   [scoring recipe](references/module-scores.md). Use cited published sets/data or
+   unbiased DE signatures from the user's data. Compare conditions at the sample level.
 6. **Optional — marker-panel QC:** to test whether a small gene panel actually *separates* the
    annotated types (e.g. for a flow panel), measure discriminatory power with a classifier
    benchmarked against ceiling/floor. See references/panel-discriminatory-power.md.
